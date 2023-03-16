@@ -11,7 +11,7 @@ import project from './components/project.vue';
   </div>
 
   <div class="input_section">
-  <project_input :project_input="project_body_data"/>
+  <project_input :project_input="project_body_data" @upload="create_new_project"/>
   </div>
   <div class="project_section">
     <project/>
@@ -49,7 +49,11 @@ img{
 export default {
   data(){
     return{
-      project_body_data:{projectname:'',author_name:'',web_url:'', image_url:''}
+      project_body_data:{
+        projectname:'',
+        author_name:'',
+        web_url:'', 
+        image_url:''}
     }
   },
 
