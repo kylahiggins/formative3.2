@@ -11,13 +11,10 @@ import project from './components/project.vue';
   </div>
 
   <div class="input_section">
-  <project_input :project_input="project_body_data" 
-  @upload="create_new_project"/>
+  <project_input :project_input="project_body_data" @upload="create_new_project"/>
   </div>
   <div class="project_section">
-    <project v-for="project in all_projects" :projectObj="project"
-    @delete="delete_project_by_id(project._id)"
-    @update="update_projects_by_id(project._id)"/>
+    <project/>
   </div>
 </template>
 
@@ -56,9 +53,7 @@ export default {
         projectname:'',
         author_name:'',
         web_url:'', 
-        image_url:''},
-
-        all_projects:[]
+        image_url:''}
     }
   },
 
@@ -67,7 +62,6 @@ export default {
         async fetch_all_projects(){
             const response = await fetch('http://localhost:4000/projects/');
             const fetchedData = await response.json();
-            this.all_projects= fetchedData;
             // console.log(fetchedData);
             // now you can load that data to your preferred variable in data()
         },
@@ -86,7 +80,6 @@ export default {
             // console.log(fetchURL);
             const response = await fetch(fetchURL, { method:"DELETE"});
             const fetchedData = await response.json(); 
-            this.fetch_all_projects();
             // console.log(fetchedData);
             // fetchedData is the confirmation came from backend for the deletion of the item (or info on delete operation having failed!)
         },
@@ -100,7 +93,6 @@ export default {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(this.project_body_data)
                 });
-                this.fetch_all_projects();
             const fetchedData = await response.json();  
             // console.log(fetchedData);
             // fetchedData is the confirmation came from backend for the update of the item (or info on update operation having failed!)
@@ -114,14 +106,10 @@ export default {
                 body: JSON.stringify(this.project_body_data)
                 });
             const fetchedData = await response.json();
-            this.fetch_all_projects();
             // console.log(fetchedData);
             // fetchedData is the confirmation came from backend for the creation of the item (or info on creation operation having failed!)
         }
         
-    },
-    created(){
-      this.fetch_all_projects();
     }
     }
 </script>
