@@ -13,7 +13,7 @@ app.use(function(req, res, next){
 });
 //DATABASE
 // **** change this below DB link to your mongoDB cluster ****
-const DB = "mongodb+srv://kylahiggins:One4damoney@cluster0.rwd0ufr.mongodb.net/?retryWrites=true&w=majority";//insert your mongoDB link that emerges out of the process described in teams for step by step mongoDB creation. replace <password> part with password you have given to your main project at cluster creation
+const DB = "mongodb+srv://kylahiggins:One4damoney@cluster0.rwd0ufr.mongodb.net/kylas_database?retryWrites=true&w=majority";
 const PORT = 4000;
 mongoose.connect(
     DB,
